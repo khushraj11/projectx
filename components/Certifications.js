@@ -1,63 +1,72 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Certifications() {
+  const [selected, setSelected] = useState(null);
+
   const certs = [
     {
       title: "Web Development",
       org: "IIT Delhi",
       year: "2026",
-      link: "/certificates/web-dev.pdf",
+      image: "/certificates/vue-cert.jpg",
     },
   ];
 
   return (
-    <section id="certifications" className="py-24">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+    <section className="py-20 px-6">
+      <div className="max-w-5xl mx-auto">
 
-        <h2 className="text-3xl font-bold mb-12">
-          Certifications 🎓
+        <h2 className="text-3xl font-bold text-center mb-12">
+          Certifications 📜
         </h2>
 
-        <div className="flex justify-center">
+        {/* GRID */}
+        <div className="grid md:grid-cols-2 gap-8">
 
           {certs.map((cert, i) => (
-
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              whileHover={{ scale: 1.05 }}
-              className="p-6 w-72 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl"
+              className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-xl p-5"
             >
 
-              <h3 className="text-xl font-semibold">
+              {/* TITLE */}
+              <h3 className="text-lg font-semibold mb-1">
                 {cert.title}
               </h3>
 
-              <p className="text-gray-400 mt-2">
-                {cert.org}
+              {/* SUBTEXT */}
+              <p className="text-sm text-gray-400 mb-3">
+                {cert.org} • {cert.year}
               </p>
 
-              <p className="text-gray-400 text-sm">
-                {cert.year}
-              </p>
-
-              <a
-                href={cert.link}
-                target="_blank"
-                className="inline-block mt-4 border px-4 py-2 rounded-lg hover:bg-white hover:text-black transition"
+              {/* VIEW BUTTON */}
+              <button
+                onClick={() => setSelected(cert.image)}
+                className="text-sm px-4 py-2 border border-white/30 rounded-lg hover:bg-white hover:text-black transition"
               >
-                View Certificate
-              </a>
+                View
+              </button>
 
-            </motion.div>
-
+            </div>
           ))}
 
         </div>
+
+        {/* MODAL */}
+        {selected && (
+          <div
+            onClick={() => setSelected(null)}
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+          >
+            <img
+              src={selected}
+              alt="certificate"
+              className="max-w-[90%] max-h-[90%] rounded-lg"
+            />
+          </div>
+        )}
 
       </div>
     </section>
