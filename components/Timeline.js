@@ -1,63 +1,89 @@
 "use client";
-
 import { motion } from "framer-motion";
 
 export default function Timeline() {
   const data = [
-    { title: "Joined College", year: "Aug 2025" },
-    { title: "Started Programming", year: "2025" },
-    { title: "Web Development", year: "2026" },
+    {
+      title: "Started B.Tech CSE",
+      year: "Aug 2025",
+      desc: "Enrolled in Computer Science Engineering. Began the journey into tech.",
+      color: "var(--cyan)"
+    },
+    {
+      title: "Started Programming",
+      year: "Late 2025",
+      desc: "Picked up Python and JavaScript. Built first automation scripts and mini-projects.",
+      color: "var(--violet)"
+    },
+    {
+      title: "Web Development",
+      year: "2026",
+      desc: "Learned React and Next.js. Built full-stack projects and this portfolio.",
+      color: "var(--cyan)"
+    },
   ];
 
   return (
-    <section className="py-24">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="timeline" style={{ padding: '100px 24px' }}>
+      <div style={{ maxWidth: 700, margin: '0 auto' }}>
 
-        <h2 className="text-3xl font-bold text-center mb-16">
-          My Journey 🚀
-        </h2>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{ marginBottom: 56 }}
+        >
+          <span className="section-tag">Journey</span>
+          <h2 className="font-display" style={{
+            fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 800,
+            letterSpacing: '-1.5px', lineHeight: 1.1
+          }}>
+            My <span style={{ color: 'var(--cyan)' }}>story</span>
+          </h2>
+        </motion.div>
 
-        <div className="relative">
+        <div style={{ position: 'relative', paddingLeft: 32 }}>
+          {/* Vertical line */}
+          <div style={{
+            position: 'absolute', left: 7, top: 8, bottom: 8,
+            width: 2,
+            background: 'linear-gradient(to bottom, var(--cyan), var(--violet), transparent)'
+          }} />
 
-          {/* 🔥 Vertical Line */}
-          <div className="absolute left-4 top-0 w-[2px] h-full bg-white/20"></div>
-
-          <div className="space-y-12">
-
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
             {data.map((item, i) => (
-
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: 40 }}
+                initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.2 }}
-                className="relative pl-12"
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                style={{ position: 'relative' }}
               >
+                {/* Dot */}
+                <div style={{
+                  position: 'absolute', left: -29, top: 20,
+                  width: 14, height: 14, borderRadius: '50%',
+                  background: item.color,
+                  boxShadow: `0 0 12px ${item.color}`,
+                  border: '2px solid var(--bg)'
+                }} />
 
-                {/* 🔥 Dot */}
-                <div className="absolute left-0 top-2 w-4 h-4 bg-purple-500 rounded-full border-2 border-white"></div>
-
-                {/* 🔥 Card */}
-                <div className="p-5 backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl hover:scale-[1.02] transition">
-
-                  <h3 className="font-semibold text-lg">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-gray-400 text-sm">
-                    {item.year}
-                  </p>
-
+                <div className="glow-card" style={{ padding: '20px 24px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <h3 style={{ fontSize: 17, fontWeight: 600 }}>{item.title}</h3>
+                    <span style={{
+                      fontSize: 12, fontWeight: 600, color: item.color,
+                      background: item.color === 'var(--cyan)' ? 'rgba(0,245,212,0.1)' : 'rgba(191,90,242,0.1)',
+                      padding: '3px 10px', borderRadius: 20
+                    }}>{item.year}</span>
+                  </div>
+                  <p style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>{item.desc}</p>
                 </div>
-
               </motion.div>
-
             ))}
-
           </div>
-
         </div>
-
       </div>
     </section>
   );
