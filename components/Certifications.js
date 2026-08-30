@@ -7,18 +7,31 @@ export default function Certifications() {
 
   const certs = [
     {
-      title: "Web Development",
-      org: "IIT Delhi",
+      title: "Web Development Workshop",
+      org: "IIT Delhi — Tryst",
       year: "2026",
       image: "/certificates/vue-cert.jpg",
       color: "var(--cyan)"
     },
+    {
+      title: "Programming with Python — Level 1",
+      org: "Infosys Springboard",
+      year: "2025",
+      image: "/certificates/python1-cert.jpg",
+      color: "var(--violet)"
+    },
+    {
+      title: "Programming with Python — Level 2",
+      org: "Infosys Springboard",
+      year: "2025",
+      image: "/certificates/python2-cert.jpg",
+      color: "var(--violet)"
+    },
   ];
 
   return (
-    <section id="certifications" style={{ padding: '100px 24px' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-
+    <section id="certifications" style={{ padding: "100px 24px" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,14 +40,14 @@ export default function Certifications() {
         >
           <span className="section-tag">Certifications</span>
           <h2 className="font-display" style={{
-            fontSize: 'clamp(32px, 5vw, 52px)', fontWeight: 800,
-            letterSpacing: '-1.5px', lineHeight: 1.1
+            fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 800,
+            letterSpacing: "-1.5px", lineHeight: 1.1
           }}>
-            What I've <span style={{ color: 'var(--violet)' }}>earned</span>
+            What I have <span style={{ color: "var(--violet)" }}>earned</span>
           </h2>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, maxWidth: 600 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           {certs.map((cert, i) => (
             <motion.div
               key={i}
@@ -44,25 +57,25 @@ export default function Certifications() {
               transition={{ delay: i * 0.1 }}
               whileHover={{ y: -4 }}
               className="glow-card"
-              style={{ padding: '28px 24px' }}
+              style={{ padding: "28px 24px" }}
             >
               <div style={{
                 width: 44, height: 44, borderRadius: 12,
-                background: 'rgba(0,245,212,0.1)',
-                border: '1px solid rgba(0,245,212,0.2)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: cert.color === "var(--cyan)" ? "rgba(0,245,212,0.1)" : "rgba(191,90,242,0.1)",
+                border: cert.color === "var(--cyan)" ? "1px solid rgba(0,245,212,0.2)" : "1px solid rgba(191,90,242,0.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: 20, marginBottom: 16
               }}>📜</div>
 
-              <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 6 }}>{cert.title}</h3>
-              <p style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 20 }}>
+              <h3 style={{ fontSize: 17, fontWeight: 600, marginBottom: 6, color: cert.color }}>{cert.title}</h3>
+              <p style={{ fontSize: 13, color: "var(--muted)", marginBottom: 20 }}>
                 {cert.org} &nbsp;·&nbsp; {cert.year}
               </p>
 
               <button
                 onClick={() => setSelected(cert.image)}
                 className="btn-outline"
-                style={{ fontSize: 13, padding: '8px 18px' }}
+                style={{ fontSize: 13, padding: "8px 18px" }}
               >
                 View Certificate →
               </button>
@@ -70,18 +83,17 @@ export default function Certifications() {
           ))}
         </div>
 
-        {/* Modal */}
         {selected && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onClick={() => setSelected(null)}
             style={{
-              position: 'fixed', inset: 0, zIndex: 999,
-              background: 'rgba(0,0,0,0.9)',
-              backdropFilter: 'blur(10px)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'zoom-out'
+              position: "fixed", inset: 0, zIndex: 999,
+              background: "rgba(0,0,0,0.9)",
+              backdropFilter: "blur(10px)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              cursor: "zoom-out"
             }}
           >
             <motion.img
@@ -89,7 +101,7 @@ export default function Certifications() {
               animate={{ scale: 1 }}
               src={selected}
               alt="Certificate"
-              style={{ maxWidth: '90%', maxHeight: '90vh', borderRadius: 12, boxShadow: '0 0 80px rgba(0,245,212,0.2)' }}
+              style={{ maxWidth: "90%", maxHeight: "90vh", borderRadius: 12, boxShadow: "0 0 80px rgba(0,245,212,0.2)" }}
             />
           </motion.div>
         )}
