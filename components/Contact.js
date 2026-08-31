@@ -15,7 +15,7 @@ export default function Contact() {
       icon: <FaLinkedin />,
       label: "LinkedIn",
       sub: "linkedin.com/in/khushraj",
-      href: "https://linkedin.com/in/khushraj",
+      href: "https://www.linkedin.com/in/khush-raj-27b1a4351/",
       color: "#0A66C2"
     },
     {
